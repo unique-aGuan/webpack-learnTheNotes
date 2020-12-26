@@ -153,7 +153,7 @@ eval("\n\nvar isOldIE = function isOldIE() {\n  var memo;\n  return function mem
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__.p + \"ece8d095ea1357d5196b3fcb7b2a7133.jpg\";\n\n//# sourceURL=webpack:///./src/ag.jpg?");
+eval("module.exports = __webpack_require__.p + \"ece8d095ea.jpg\";\n\n//# sourceURL=webpack:///./src/ag.jpg?");
 
 /***/ }),
 
