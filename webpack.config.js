@@ -13,7 +13,7 @@ const { resolve } = require('path');
 module.exports = {
   // webpack配置
   // 入口起点
-  entry: './src/index.js',
+  entry: './src/js/index.js',
   // 输出
   output: {
     // 输出文件名
