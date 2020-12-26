@@ -17,7 +17,7 @@ module.exports = {
   // 输出
   output: {
     // 输出文件名
-    filename: 'built.js',
+    filename: 'js/built.js',
     // 输出路径
     path: resolve(__dirname, 'build')
   },
@@ -34,7 +34,7 @@ module.exports = {
           // use数组中loader的执行顺序：从右到左，从下到上 依次执行
           // 创建style标签，将js中的样式资源插入进行，添加到head中生效
           'style-loader',
-          // 将css文件编程commonjs模块加载到js文件中，里面内容是字符串
+          // 将css文件编程commonjs模块加载到js文件中，里面内容是字符串(所以不会打包出css文件)
           'css-loader'
         ]
       },
@@ -68,7 +68,8 @@ module.exports = {
           // 给图片进行重命名
           // [hash:10]去图片的hash的前10位
           // [ext]取文件原来扩展名
-          name: '[hash:10].[ext]'
+          name: '[hash:10].[ext]',
+          outputPath: 'imgs'
         }
       },
       {
@@ -81,7 +82,8 @@ module.exports = {
         exclude: /\.(css|js|html|less|json|jpg|png|gif)$/,
         loader: "file-loader",
         options: {
-          name: '[hash:10].[ext]'
+          name: '[hash:10].[ext]',
+          outputPath: 'media'
         }
       }
     ]
