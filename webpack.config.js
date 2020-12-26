@@ -99,4 +99,18 @@ module.exports = {
   ],
   mode: 'development',
   // mode: 'productiong';
+
+  // 开发服务器 devServer：用来自动化（自动编译，自动打开浏览器，自动刷新浏览器~~~）
+  // 特点：只会在内存中编译打包，不会有任何输出
+  // 启动devServer指令为：webpack-dev-server
+  devServer: {
+    // contentBase 项目运行的目录，一般要用绝对路径
+    contentBase: resolve(__dirname, 'build'),
+    // 开启gzip压缩 更小 更快
+    compress: true,
+    // 端口号
+    port: 3000,
+    // 自动打开浏览器 
+    open: true
+  }
 }
