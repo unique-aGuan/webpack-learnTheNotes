@@ -75,6 +75,14 @@ module.exports = {
         test: /\.html$/,
         // 处理html文件的img图片：html-loader （负责引入img
         loader: "html-loader"
+      },
+      {
+        // 排除css/js/html资源
+        exclude: /\.(css|js|html|less|json|jpg|png|gif)$/,
+        loader: "file-loader",
+        options: {
+          name: '[hash:10].[ext]'
+        }
       }
     ]
   },
@@ -86,7 +94,7 @@ module.exports = {
     // 需求：需要有结构的HTML文件
     new HtmlWebpackPlugin({
       // 复制 './src/index.html'文件，并自动引入打包输出的所有资源
-      template: './src/index.html'
+      template: './src/main.html'
     })
   ],
   mode: 'development',

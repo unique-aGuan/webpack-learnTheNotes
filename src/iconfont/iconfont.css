@@ -1,0 +1,33 @@
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1608979442940'); /* IE9 */
+  src: url('iconfont.eot?t=1608979442940#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAOMAAsAAAAACAAAAAM+AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDIgqDLIJoATYCJAMUCwwABCAFhG0HSxvnBsiuMTaG5U0gzIzVKjR4BODd3wuwUuSIh+/XXs99sNkQKlDImsdHRUVBy5ZQVhE5U2Gqq6rZiP/nftlboGwZUnKAqFC1R6H+LmQnP3vg0gMAB0hCATuyLM929LTn0afWCtIN9VzgARVkL765Px5swOWD8AC68SI1QECU8Howr2n/Gnv++6vx7hZQIOejvuVyHqe21Kxm2QUU2H3iUmQFEmCTkKYguwdjkfcJ9JhWyXE8PDkDfoW5LBC3LbEW/JmoovCFVmgq9hbxGjza9NL5HfAqeH/8pz5BUjPzoZOrQxR6fxk/XzEwnw2Y8R6DiowVoBDnld4zrii7wqVHvc5tA2gUIf3qf4cxJYGVdWp7qD+8JCtEw6zvA/t0rvCLOIjgF0UkfjFE5tdb+Qt5pIIe9OIR8Jo2zozZWoUYIqJlxO6PnnRz0vnnOe79RUXy9Srfc7xc40b1zLOcHSQ9H6XJQLT3AzSLa9Q9IuV1pLXP9eLq7svg7HPZ5kqwP7H3XHPkflEZTXI0a+748rU9mbPixJ4rJoMePdp8L/jjR9LzpK8/gr0Z3cuv4yu7DXr98PjDgz8DpAsClVnd5rjpdTQzIGvP8T0SZiKyu9NNTTKGKNl+G6zMfAk4tfvdyX+/cm6p3758Pq+fyi3z+dmrinuwEaCja65eWoB81/nff8e599d9xt5brfPzp4CfiTs3Fe3opl+ulYBlP0oGdhRNYdpqUdodqeKvFm51aUKPHnQwgyO+jaMfh+sJrfEEki5TkLVmsMJcgarXDjRae9Bj2cjhXqMUlyjdWLKNQBhyC5IB3yAb8horzK9QTfgLjaEw9DiN9DN7zTWhAcXWakbxuk3YIjLKbYdGYeMUE/HwWpVWBOw5pmwrgetSmS+MsChTY2yw14t6rTnmSkbwMHmMhcMSx5RcYkRXL2oda68p+qonVRMZAeSIwqylMRS2ziaYhZCiuNdbQ4XXT2GEuLC1VAOpKjyHUWzW+FidarUANqKNQqRroWNbT6inaRzGKVIENkzcTNjKSlisetYShtCqLfZIx7Sroak4qq2eXx95xiPQw7yvRoocJWo0urYbGY5Hon5/QlUjrij12ix8xBYAAAA=') format('woff2'),
+  url('iconfont.woff?t=1608979442940') format('woff'),
+  url('iconfont.ttf?t=1608979442940') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1608979442940#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-3column:before {
+  content: "\e663";
+}
+
+.icon-column-4:before {
+  content: "\e664";
+}
+
+.icon-add:before {
+  content: "\e665";
+}
+
+.icon-select:before {
+  content: "\e6cf";
+}
+
