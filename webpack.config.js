@@ -36,6 +36,11 @@ module.exports = {
         }
       },
       {
+        test: /\.html$/,
+        // 处理html文件的img图片：html-loader （负责引入img
+        loader: "html-loader"
+      },
+      {
         exclude: /\.(css|js|html|less|json|jpg|png|gif)$/,
         loader: 'file-loader',
         options: {
@@ -47,7 +52,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/mian.html'
+      template: './src/main.html'
     })
   ],
   devServer: {

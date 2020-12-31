@@ -60,7 +60,7 @@ module.exports = {
           // 图片大小小于8kb，就会被base64处理 8~12kb
           // 优点：减少请求数量（减轻服务器压力）
           // 缺点：图片体积会更大（文件请求速度更慢）
-          limit: 8 * 1023,
+          limit: 8 * 1024,
           // 问题：因为url-loader默认使用es6模块化，而html-loader引入图片是commonjs
           // 解析时会出问题：[object Module]
           // 解决：关闭url-loader的es6模块化，使用commonjs
