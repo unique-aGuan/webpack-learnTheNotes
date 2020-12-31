@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // 这个插件会把css从js中抽离出来
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 压缩css文件的插件
-const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
+const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 
 // 设置nodejs环境变量(就是运行的时候的一些临时变量)
 process.env.NODE_ENV = 'development';
@@ -16,10 +16,29 @@ module.exports = {
   entry: './src/js/index.js',
   output: {
     filename: 'js/built.js',
-    path: resolve(__dirname, 'build')
+    path: resolve(__dirname, 'build'),
   },
   module: {
     rules: [
+      {
+        /*
+          语法检查：eslint-loader eslint
+          只检查自己写的源代码，第三方的的库是不用检查的
+          设置检查规则：
+            package.json 中 eslintConfig中设置
+            airbnb --> eslint-config-airbnb-base eslint eslint-plugin-import
+            "eslintConfig": {
+              "extends": "airbnb-base"
+            }
+        */
+        test: /\.js$/,
+        exclude: /\node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          // 自动修复
+          fix: true,
+        },
+      },
       {
         test: /\.css$/,
         use: [
@@ -27,7 +46,7 @@ module.exports = {
           // 这个loader取代style-loader。作用：提取js中的css成单独的文件
           MiniCssExtractPlugin.loader,
           'css-loader',
-          /* 
+          /*
             css兼容性处理：postcss --> postcss-loader postcss-preset-env
             postcss-preset-env: 帮助postcss找到package.josn中browserslist里面的配置，通过配置加载指定的兼容性样式
             "browserslist": {
@@ -62,8 +81,8 @@ module.exports = {
               }
             }
           } */
-          'postcss-loader'
-        ]
+          'postcss-loader',
+        ],
       },
       {
         test: /\.less$/,
@@ -71,8 +90,8 @@ module.exports = {
           // 'style-loader',
           MiniCssExtractPlugin.loader,
           'css-loader',
-          'less-loader'
-        ]
+          'less-loader',
+        ],
       },
       {
         test: /\.(jpg|png|gif)$/,
@@ -81,39 +100,39 @@ module.exports = {
           limit: 8 * 1024,
           esModule: false,
           name: '[hash:10].[ext]',
-          outputPath: 'imgs'
-        }
+          outputPath: 'imgs',
+        },
       },
       {
         test: /\.html$/,
         // 处理html文件的img图片：html-loader （负责引入img
-        loader: "html-loader"
+        loader: 'html-loader',
       },
       {
         exclude: /\.(css|js|html|less|json|jpg|png|gif)$/,
         loader: 'file-loader',
         options: {
           name: '[hash:10].[ext]',
-          outputPath: 'media'
-        }
-      }
-    ]
+          outputPath: 'media',
+        },
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/main.html'
+      template: './src/main.html',
     }),
     new MiniCssExtractPlugin({
       // 对输出的文件进行重命名
-      filename: 'css/built.css'
+      filename: 'css/built.css',
     }),
     // 压缩css
-    new OptimizeCssAssetsWebpackPlugin()
+    new OptimizeCssAssetsWebpackPlugin(),
   ],
   devServer: {
     contentBase: resolve(__dirname, 'build'),
     compress: true,
     port: 3000,
-    open: true
-  }
-}
+    open: true,
+  },
+};
