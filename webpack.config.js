@@ -3,9 +3,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // 这个插件会把css从js中抽离出来
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// 压缩css文件的插件
+const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 
 // 设置nodejs环境变量(就是运行的时候的一些临时变量)
 process.env.NODE_ENV = 'development';
+
+// optimize-css-assets-webpack-plugin
 
 module.exports = {
   mode: 'development',
@@ -102,7 +106,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       // 对输出的文件进行重命名
       filename: 'css/built.css'
-    })
+    }),
+    // 压缩css
+    new OptimizeCssAssetsWebpackPlugin()
   ],
   devServer: {
     contentBase: resolve(__dirname, 'build'),
