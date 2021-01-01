@@ -21,6 +21,41 @@ module.exports = {
   module: {
     rules: [
       {
+        /* 
+          js兼容性处理：babel-loader @babel/preset-env @babel/core
+          1. 基本js兼容性处理 --> @babel/preset-env
+            问题：只能转换基本语法，如promise就不能转换了
+          2. 全部的js兼容性处理 --> @babel/polyfill
+            问题：我只要就解决部分兼容性问题，但是将所有的兼容性代码全部引入，体积太大了~
+          3. 需要做兼容性处理的就做：按需加载 --> corejs
+        */
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: { // 预设：指示 babel 做怎么样的兼容性处理 
+          presets: [
+            [
+              '@babel/preset-env',
+              {
+                // 按需加载 
+                useBuiltIns: 'usage', // 指定 core-js 版本 
+                corejs: {
+                  version: 3
+                },
+                // 指定兼容性做到哪个版本浏览器 
+                targets: {
+                  chrome: '60',
+                  firefox: '60',
+                  ie: '9',
+                  safari: '10',
+                  edge: '17'
+                }
+              }
+            ]
+          ]
+        }
+      },
+      {
         /*
           语法检查：eslint-loader eslint
           只检查自己写的源代码，第三方的的库是不用检查的
@@ -32,7 +67,7 @@ module.exports = {
             }
         */
         test: /\.js$/,
-        exclude: /\node_modules/,
+        exclude: /node_modules/,
         loader: 'eslint-loader',
         options: {
           // 自动修复
