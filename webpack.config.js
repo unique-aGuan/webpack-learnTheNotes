@@ -7,7 +7,12 @@ process.env.NODE_ENV = 'development';
 
 // 复用loader
 const commonCssLoader = [
-  MiniCssExtractPlugin.loader,
+  {
+    loader: MiniCssExtractPlugin.loader,
+    options: {
+      publicPath: '../'
+    }
+  },
   'css-loader',
   {
     loader: 'postcss-loader',
@@ -24,7 +29,7 @@ const commonCssLoader = [
 
 module.exports = {
   mode: 'development',
-  entry: './src/js/index.js',
+  entry: ['./src/js/index.js', './src/main.html'],
   output: {
     filename: 'js/built.js',
     path: resolve(__dirname, 'build')
@@ -107,7 +112,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/built.css'
+      filename: 'css/[name].css'
     }),
     new OptimizeCssAssetsWebpackPlugin(),
     new HtmlWebpackPlugin({
@@ -122,6 +127,8 @@ module.exports = {
     contentBase: resolve(__dirname, 'build'),
     compress: true,
     port: 3000,
-    open: true
+    open: true,
+    // 开启HMR功能
+    hot: true
   }
 }
