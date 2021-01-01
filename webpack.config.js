@@ -12,6 +12,7 @@ process.env.NODE_ENV = 'development';
 // optimize-css-assets-webpack-plugin
 
 module.exports = {
+  // 生产环境下webpack会自动压缩js代码。用的是UglifyJsPlugin这个插件
   mode: 'development',
   entry: './src/js/index.js',
   output: {
