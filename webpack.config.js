@@ -1,4 +1,4 @@
-const { resolve } = require("path");
+const { resolve } = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -23,7 +23,7 @@ const commonCssLoader = [
 ]
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './src/js/index.js',
   output: {
     filename: 'js/built.js',
@@ -46,7 +46,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /\node_modules/,
+        exclude: /node_modules/,
         // 优先执行
         enforce: 'pre',
         loader: 'eslint-loader',
@@ -56,26 +56,28 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /\node_modules/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
           presets: [
-            '@babel/preset-env',
-            {
-              // 按需加载 
-              useBuiltIns: 'usage', // 指定 core-js 版本 
-              corejs: {
-                version: 3
-              },
-              // 指定兼容性做到哪个版本浏览器 
-              targets: {
-                chrome: '60',
-                firefox: '60',
-                ie: '9',
-                safari: '10',
-                edge: '17'
+            [
+              '@babel/preset-env',
+              {
+                // 按需加载 
+                useBuiltIns: 'usage', // 指定 core-js 版本 
+                corejs: {
+                  version: 3
+                },
+                // 指定兼容性做到哪个版本浏览器 
+                targets: {
+                  chrome: '60',
+                  firefox: '60',
+                  ie: '9',
+                  safari: '10',
+                  edge: '17'
+                }
               }
-            }
+            ]
           ]
         }
       },
@@ -94,7 +96,7 @@ module.exports = {
         loader: 'html-loader'
       },
       {
-        excluede: /\.(css|js|html|less|json|jpg|png|gif)$/,
+        exclude: /\.(css|js|html|less|json|jpg|png|gif)$/,
         loader: 'file-loader',
         options: {
           name: '[hash:10].[ext]',
