@@ -157,6 +157,12 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/main.html',
+      minify: {
+        // 移除空格
+        collapseWhitespace: true,
+        // 移除注释
+        removeComments: true
+      }
     }),
     new MiniCssExtractPlugin({
       // 对输出的文件进行重命名
