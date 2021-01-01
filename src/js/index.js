@@ -1,6 +1,6 @@
 // import '@babel/polyfill'; // 可以直接引入使用
 
-// import data from '../media/data.json';
+import data from '../media/data.json';
 import '../css/index.css';
 import '../css/index.less';
 

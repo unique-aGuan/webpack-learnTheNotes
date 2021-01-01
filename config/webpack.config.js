@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-process.env.NODE_ENV = 'development';
+process.env.NODE_ENV = 'production';
 
 // 复用loader
 const commonCssLoader = [
@@ -23,7 +23,7 @@ const commonCssLoader = [
 ]
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './src/js/index.js',
   output: {
     filename: 'js/built.js',
@@ -117,11 +117,5 @@ module.exports = {
         removeComments: true
       }
     })
-  ],
-  devServer: {
-    contentBase: resolve(__dirname, 'build'),
-    compress: true,
-    port: 3000,
-    open: true
-  }
+  ]
 }
