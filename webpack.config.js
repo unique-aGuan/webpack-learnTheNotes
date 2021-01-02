@@ -79,7 +79,10 @@ module.exports = {
                     }
                   }
                 ]
-              ]
+              ],
+              // 开启Babel缓存
+              // 第二次构建时速度会更快一些
+              cacheDirectory: true
             }
           },
           {
