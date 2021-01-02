@@ -1,7 +1,7 @@
 ## oneOf
   原理及作用：webpack在依次执行配置好的loader的时候，当有一个文件被（例：js）匹配到并处理了，这个时候webpack不会跳出，而是会继续往下匹配，所以这里就需要oneOf来包裹住想要执行只执行一次的loader配置啦，这样当默认文件被匹配到一次的时候，就会立刻跳出，相当于for循环种的break，提升构建速度 。 
 ## 缓存 （在写代码的时候我们写的js代码是最多的，结构和样式不是很多，就算很多我们也没办法做更多的处理）
-  babel（js的兼容性处理）缓存：  
+  babel（js的兼容性处理）缓存：（优化打包速度）  
     使用及解释：假如我们有100个js模块，而我们改变了其中一个，那么只有这一个是需要改变的，其他都不需要改变（很想HMR功能，但是HMR却值时在开发环境种才能使用的），所以我们要开启babel缓存，把这一百个处理过的js文件都缓存下来，当我们改变文件的时候，去对比，一样则直接使用缓存。 
 
   ```
@@ -12,4 +12,33 @@
     }
   ```
 
-  资源缓存：(对于js，css这些强缓存资源做名字处理，加hash值)
+  资源缓存：（优化线上缓存）  
+    原理：对于js，css这些强缓存资源做名字处理，加hash值，这样每次重新打包都会形成新的名字，就不会有强缓存的问题了
+  ```
+    output: {
+      filename: 'js/built.[hash:10].js',
+      path: resolve(__dirname, 'build')
+    },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].[hash:10].css'
+      }),
+    ],
+  ``` 
+  问题：每次重新打包都会生成新的打包的时候的hash值，所以每次无论是否改变代码，都会改变文件名字（傻瓜式），有时候就因为改了一个文件重新导报一次，却导致所有的都缓存失效。而且，js和css的hash是一样的  
+  chunkhash：根据chunk生成的hash值。如果打包来源于同一个chunk，那么hash值就一样  
+  问题：js和css的hash还是一样的
+    因为css是在js中引入的，所以同属于一个chunk（所有根据一个entry入口文件（那个js）生成的资源都属于一个chunk）
+  contenthash：根据文件的内容生成hash值。不同文件hash值一定不一样，每次改动都会生成新的，不改则不会生成新的hash。
+  ```
+    output: {
+      filename: 'js/built.[contenthash:10].js',
+      path: resolve(__dirname, 'build')
+    },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].[contenthash:10].css'
+      }),
+    ],
+  ``` 
+  三者区别：每次都会，根据chunk，根据内容
