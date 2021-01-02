@@ -31,7 +31,7 @@ module.exports = {
   mode: 'development',
   entry: ['./src/js/index.js', './src/main.html'],
   output: {
-    filename: 'js/built.js',
+    filename: 'js/built.[hash:10].js',
     path: resolve(__dirname, 'build')
   },
   module: {
@@ -113,7 +113,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css'
+      filename: 'css/[name].[hash:10].css'
     }),
     new OptimizeCssAssetsWebpackPlugin(),
     new HtmlWebpackPlugin({
