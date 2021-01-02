@@ -130,5 +130,6 @@ module.exports = {
     open: true,
     // 开启HMR功能
     hot: true
-  }
+  },
+  devtool: 'inline-source-map'
 }
