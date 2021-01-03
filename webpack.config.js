@@ -30,8 +30,14 @@ const commonCssLoader = [
 module.exports = {
   mode: 'development',
   entry: ['./src/js/index.js', './src/main.html'],
+  // entry: {
+  //   // 多入口：有一个入口，最终就输出一个bundle
+  //   main: './src/js/index.js',
+  //   print: './src/js/print.js'
+  // },
   output: {
-    filename: 'js/built.[contenthash:10].js',
+    // name 去文件名 （上面entry中对象名）
+    filename: 'js/[name].[contenthash:10].js',
     path: resolve(__dirname, 'build')
   },
   module: {
@@ -131,5 +137,10 @@ module.exports = {
     open: true,
     hot: true
   },
-  devtool: 'inline-source-map'
+  devtool: 'inline-source-map',
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  }
 }

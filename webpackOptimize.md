@@ -50,5 +50,36 @@
     在package.json中配置。  
     "sideEffects": false 所有代码都没有副作用（都可以tree shaking）  
     可能会把：css / @babel/polyfill （副作用）文件干掉  
-  解决: 标记特殊文件，不让其处理
-    "sideEffects": ["*.css", "*.less"] 
+  解决: 标记特殊文件，不让其处理  
+    "sideEffects": ["*.css", "*.less"]  
+## code split 代码分割（将打包输出的一个大的 bundle.js 文件拆分成多个小文件，这样可以并行加载多个文件，比加载一个文件更快）  
+  作用：1. 并行加载
+        2. 这是做vue路由懒加载必要条件(在vue中如果想实现路由懒加载就首先要实现代码分割)  
+  方法一： 手动多入口入口进行代码分割  
+  ```
+    // 多入口（多页面应用需要这样开始写）
+    entry: {
+      // 多入口：多个入口，最终就输出一个bundle
+      main: './src/js/index.js',
+      print: './src/js/print.js'
+    },
+    output: {
+      // name 去文件名 （上面entry中对象名）
+      filename: 'js/[name].[contenthash:10].js',
+      path: resolve(__dirname, 'build')
+    },
+  ```
+问题：我们手动去指定多个入口，多了的话，不人性化。
+方法二：optimization（可以和方法一结合用）
+```
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
+```
+作用：
+  其一：不论多入口还是单入口，其都会将node_modules中的代码单独打包（分隔了第三方的代码，默认条件是超过了某个大小30k）
+  其二：多入口的配置，其会分析多入口的每个chunk有没有公共文件。如果有就会单独打包成一个chunk（比如两个模块都引入了jquery会被打包成单独的文件，默认条件是超过了某个大小30k）
+方法三：import 动态导入语法
+  
