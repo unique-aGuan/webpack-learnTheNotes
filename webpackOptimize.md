@@ -81,5 +81,27 @@
 作用：
   其一：不论多入口还是单入口，其都会将node_modules中的代码单独打包（分隔了第三方的代码，默认条件是超过了某个大小30k）
   其二：多入口的配置，其会分析多入口的每个chunk有没有公共文件。如果有就会单独打包成一个chunk（比如两个模块都引入了jquery会被打包成单独的文件，默认条件是超过了某个大小30k）
-方法三：import 动态导入语法
-  
+方法三：import()函数 动态导入语法
+```
+  // import动态导入，分割chunk 这里我写的有问题：1. 引入文件失败catch 2. import 函数 eslint 不识别需要在config里边特殊配置。
+  // import(/* webpackChunkName: 'print' */'./print').then((reslut) => {
+  //   console.log(reslut(), '成功')
+  // }).catch(() => {
+  //   console.log('失败')
+  // })
+```
+
+## lazy loading 懒加载和 pre loading 预加载
+  lazy loading: 懒加载就是给import函数一个触发条件（不触发就不加载），如onclick 如 if 或者 vue-router中的template
+  prefetch loading: 一个异步任务而已，当点击的时候，再把已经加载过来的文件从内存中重新读取一遍（兼容性很差）
+  ```
+    document.getElementById('btn').onclick = function() {
+      // 将import的内容放在异步回调函数中使用，点击按钮，test.js才会被加载(不会重复加载)
+      // webpackPrefetch: true表示开启预加载
+      import(/* webpackChunkName: 'print', webpackPrefetch: true */'./print').then((reslut) => {
+          console.log(reslut(), '成功')
+        }).catch(() => {
+          console.log('失败')
+      })
+    };
+```
